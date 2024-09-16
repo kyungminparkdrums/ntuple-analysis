@@ -521,6 +521,7 @@ pfeginput_pt = [
     Selection('Pt5', 'p_{T}^{TOBJ}#geq5GeV', lambda ar: ar.pt >= 5),
 ]
 
+'''
 # FIXME: these should be done using the actual online to offline threshold scaling from turn-ons
 menu_thresh_pt = [
     Selection('PtStaEB51', 'p_{T}^{TOBJ}#geq51GeV', lambda ar: ar.pt >= 40.7),
@@ -541,6 +542,65 @@ menu_thresh_pt = [
     Selection('PtIsoPhoEE22', 'p_{T}^{TOBJ}#geq22GeV', lambda ar: ar.pt >= 15.9),
     Selection('PtIsoPhoEB12', 'p_{T}^{TOBJ}#geq12GeV', lambda ar: ar.pt >= 8.5),
     Selection('PtIsoPhoEE12', 'p_{T}^{TOBJ}#geq12GeV', lambda ar: ar.pt >= 6.),
+]
+'''
+
+def scaling_offline2online_pt(obj, sel, pt):
+    #FIXME: this should come from confing yaml file...
+    with open('data/scalings/scaling_ARv38.json') as f:
+        scaling_data = json.load(f)
+
+    scaling = scaling_data[obj][sel]
+    return (pt-float(scaling['b']))/float(scaling['a'])
+
+menu_thresh_pt = [
+    Selection('PtStaEB51', 'p_{T}^{TOBJ}#geq51GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEB', 51): ar.pt >= ptcut),
+    Selection('PtStaEE51', 'p_{T}^{TOBJ}#geq51GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEE', 51): ar.pt >= ptcut),
+    Selection('PtStaEB37', 'p_{T}^{TOBJ}#geq37GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEB', 37): ar.pt >= ptcut),
+    Selection('PtStaEE37', 'p_{T}^{TOBJ}#geq37GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEE', 37): ar.pt >= ptcut),
+    Selection('PtStaEB24', 'p_{T}^{TOBJ}#geq24GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEB', 24): ar.pt >= ptcut),
+    Selection('PtStaEE24', 'p_{T}^{TOBJ}#geq24GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEE', 24): ar.pt >= ptcut),
+    Selection('PtStaEB12', 'p_{T}^{TOBJ}#geq12GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEB', 12): ar.pt >= ptcut),
+    Selection('PtStaEE12', 'p_{T}^{TOBJ}#geq12GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('EGSta', 'EtaEE', 12): ar.pt >= ptcut),
+
+    Selection('PtEleEB36', 'p_{T}^{TOBJ}#geq36GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEB', 36): ar.pt >= ptcut),
+    Selection('PtEleEE36', 'p_{T}^{TOBJ}#geq36GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEE', 36): ar.pt >= ptcut),
+    Selection('PtEleEB25', 'p_{T}^{TOBJ}#geq25GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEB', 25): ar.pt >= ptcut),
+    Selection('PtEleEE25', 'p_{T}^{TOBJ}#geq25GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEE', 25): ar.pt >= ptcut),
+    Selection('PtEleEB12', 'p_{T}^{TOBJ}#geq12GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEB', 12): ar.pt >= ptcut),
+    Selection('PtEleEE12', 'p_{T}^{TOBJ}#geq12GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEE', 12): ar.pt >= ptcut),
+
+    Selection('PtIsoEleEB28', 'p_{T}^{TOBJ}#geq28GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEB', 28): ar.pt >= ptcut),
+    Selection('PtIsoEleEE28', 'p_{T}^{TOBJ}#geq28GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEleL2', 'EtaEE', 28): ar.pt >= ptcut),
+
+    Selection('PtIsoPhoEB36', 'p_{T}^{TOBJ}#geq36GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEmL2', 'IsoEtaEB', 36): ar.pt >= ptcut),
+    Selection('PtIsoPhoEE36', 'p_{T}^{TOBJ}#geq36GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEmL2', 'IsoEtaEE', 36): ar.pt >= ptcut),
+    Selection('PtIsoPhoEB22', 'p_{T}^{TOBJ}#geq22GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEmL2', 'IsoEtaEB', 22): ar.pt >= ptcut),
+    Selection('PtIsoPhoEE22', 'p_{T}^{TOBJ}#geq22GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEmL2', 'IsoEtaEE', 22): ar.pt >= ptcut),
+    Selection('PtIsoPhoEB12', 'p_{T}^{TOBJ}#geq12GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEmL2', 'IsoEtaEB', 12): ar.pt >= ptcut),
+    Selection('PtIsoPhoEE12', 'p_{T}^{TOBJ}#geq12GeV',
+              lambda ar, ptcut=scaling_offline2online_pt('TkEmL2', 'IsoEtaEE', 12): ar.pt >= ptcut),
 ]
 
 
@@ -675,7 +735,8 @@ menu_sel = [
     ((Selector('^EtaEB')&('^IsoPhoEB')&('^IDTightE$')&('^PtIsoPhoEB36'))|(Selector('^EtaEE')&('^IsoPhoEE')&('^IDTightP')&('^PtIsoPhoEE36'))).one('SingleIsoTkPho36', 'SingleIsoTkPho36'),
     ((Selector('^EtaEB')&('^IsoPhoEB')&('^IDTightE$')&('^PtIsoPhoEB22'))|(Selector('^EtaEE')&('^IsoPhoEE')&('^IDTightP')&('^PtIsoPhoEE22'))).one('SingleIsoTkPho22', 'SingleIsoTkPho22'),
     ((Selector('^EtaEB')&('^IsoPhoEB')&('^IDTightE$')&('^PtIsoPhoEB12'))|(Selector('^EtaEE')&('^IsoPhoEE')&('^IDTightP')&('^PtIsoPhoEE12'))).one('SingleIsoTkPho12', 'SingleIsoTkPho12'),
-    ((Selector('^EtaEB')&('^IDTightE$')&('^PtStaEB51'))|(Selector('^EtaEE')&('^IDTightP')&('^PtStaEE51'))).one('SingleEGEle51', 'SingleEGEle51'),
+    ((Selector('^EtaEB')&('^IDTightE$')&('^PtStaEB51'))|(Selector('^EtaEE')&('^IDTightP')&('^PtStaEE51'))).one('SingleEGEle51', 'SingleEGEle51'), # if using TkEm
+    #((Selector('^EtaEB')&('^IDTightE$')&('^PtStaEB51'))|(Selector('^EtaEE')&('^IDTightS')&('^PtStaEE51'))).one('SingleEGEle51', 'SingleEGEle51'), # if using StaEG
     build_DiObj_selection('DoubleIsoTkPho22-12', 'DoubleIsoTkPho22-12',
                           ((Selector('^EtaEB')&('^IsoPhoEB')&('^IDTightE$')&('^PtIsoPhoEB22'))|(Selector('^EtaEE')&('^IsoPhoEE')&('^IDTightP')&('^PtIsoPhoEE22'))).one(),
                           ((Selector('^EtaEB')&('^IsoPhoEB')&('^IDTightE$')&('^PtIsoPhoEB12'))|(Selector('^EtaEE')&('^IsoPhoEE')&('^IDTightP')&('^PtIsoPhoEE12'))).one()),
@@ -685,7 +746,10 @@ menu_sel = [
     build_DiObj_selection('DoubleTkEle25-12', 'DoubleTkEle25-12',
                           ((Selector('^EtaEB')&('^IDTightE$')&('^PtEleEB25'))|(Selector('^EtaEE')&('^PtEleEE25'))).one(),
                           ((Selector('^EtaEB')&('^IDTightE$')&('^PtEleEB12'))|(Selector('^EtaEE')&('^PtEleEE12'))).one(),
-                          Selector('^Dz1$').one())
+                          Selector('^Dz1$').one()),
+    build_DiObj_selection('DoubleStaEG37-24', 'DoubleStaEG37-24',
+                          ((Selector('^EtaEB')&('^IDTightE$')&('^PtStaEB37'))|(Selector('^EtaEE')&('^IDTightP')&('^PtStaEE37'))).one(),
+                          ((Selector('^EtaEB')&('^IDTightE$')&('^PtStaEB24'))|(Selector('^EtaEE')&('^IDTightP')&('^PtStaEE24'))).one()),
 
 ]
 # repeat the call: we want the menu selections to be avaialble via the selectors

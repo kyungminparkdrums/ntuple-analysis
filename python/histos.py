@@ -238,8 +238,8 @@ class RateHistos(BaseHistos):
             pt_max = ak.max(data.pt, axis=1)
         else:
             pt_max = ak.max(data[self.var], axis=1)
-        for thr,bin_center in zip(self.h_pt.axes[0].edges, self.h_pt.axes[0].centers, strict=False):
-        # for thr,bin_center in zip(self.h_pt.axes[0].edges[1:], self.h_pt.axes[0].centers):
+        #for thr,bin_center in zip(self.h_pt.axes[0].edges, self.h_pt.axes[0].centers, strict=False):
+        for thr,bin_center in zip(self.h_pt.axes[0].edges[1:], self.h_pt.axes[0].centers):
             self.h_pt.fill(bin_center, weight=ak.sum(pt_max>=thr))
 
         # for ptf in range(0, int(pt)+1):

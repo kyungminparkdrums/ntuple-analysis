@@ -5,11 +5,13 @@ import tabulate
 
 
 def what(what):
-    match what:
-        case 'menu_rate':
-            return [histos.RateHistos], 'menu_rate', menu_rate_draw
-        case 'menu_ratecounter':
-            return [SingleObjRateHistoCounter, DoubleObjRateHistoCounter], 'menu_ratecounter', menu_ratecounter_draw
+    #match what:
+    #    case 'menu_rate':
+    if what == 'menu_rate':
+        return [histos.RateHistos], 'menu_rate', menu_rate_draw
+    #    case 'menu_ratecounter':
+    if what == 'menu_ratecounter':
+        return [SingleObjRateHistoCounter, DoubleObjRateHistoCounter], 'menu_ratecounter', menu_ratecounter_draw
 
 
 
@@ -31,14 +33,16 @@ def menu_ratecounter_draw(hplot, smps, wc):
         smp_table[smp] = []
     
     menu_single = [
-        (['TkEleL2'], ['SingleTkEle36', 'SingleTkEle36EtaEB', 'SingleTkEle36EtaEE']),
-        (['TkEleL2'], ['SingleIsoTkEle28', 'SingleIsoTkEle28EtaEB', 'SingleIsoTkEle28EtaEE']),
-        (['TkEleL2'], ['SingleIsoTkEle28Tight', 'SingleIsoTkEle28TightEtaEB', 'SingleIsoTkEle28TightEtaEE']),
-        (['TkEmL2'], ['SingleIsoTkPho36', 'SingleIsoTkPho36EtaEB', 'SingleIsoTkPho36EtaEE']),
+        #(['TkEleL2'], ['SingleTkEle36', 'SingleTkEle36EtaEB', 'SingleTkEle36EtaEE']),
+        #(['TkEleL2'], ['SingleIsoTkEle28', 'SingleIsoTkEle28EtaEB', 'SingleIsoTkEle28EtaEE']),
+        #(['TkEleL2'], ['SingleIsoTkEle28Tight', 'SingleIsoTkEle28TightEtaEB', 'SingleIsoTkEle28TightEtaEE']),
+        #(['TkEmL2'], ['SingleIsoTkPho36', 'SingleIsoTkPho36EtaEB', 'SingleIsoTkPho36EtaEE']),
+        #(['TkEmL2'], ['SingleEGEle51'])
     ]
     menu_double = [
-        (['DoubleTkEleL2'], ['DoubleTkEle25-12']),
-        (['DoubleTkEmL2'], ['DoubleIsoTkPho22-12']),
+        #(['DoubleTkEleL2'], ['DoubleTkEle25-12']),
+        #(['DoubleTkEmL2'], ['DoubleIsoTkPho22-12']),
+        (['DoubleTkEmL2'], ['DoubleStaEG37-24'])
     ]
 
 

@@ -6,9 +6,10 @@ from python.draw.drawingTools import *
 
 
 def what(what):
-    match what:
-        case 'egmenu_ele':
-            return [histos.HistoSetEff], 'eff', egmenu_ele_draw
+    #match what:
+    #    case 'egmenu_ele':
+    if what == 'egmenu_ele':
+        return [histos.HistoSetEff], 'eff', egmenu_ele_draw
 
 
 
@@ -193,6 +194,8 @@ def draw_ton(hplot, smps, wc_eff, draw_style, configs):
             # print(f"# of hsets: {len(hsets)}")
             # for hset in hsets:
             #     hset.computeEff(rebin=2)
+            if not hsets:
+                continue
             dm.addHistos([his.h_ton.h_pt.CreateGraph() for his in hsets], labels=labels)
 
             for i in range(1,len(hsets)):

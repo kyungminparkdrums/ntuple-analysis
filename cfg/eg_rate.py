@@ -168,7 +168,8 @@ egid_menu_ele_rate_selections = (selections.Selector('^SingleIsoTkEle|^SingleTkE
 egid_menu_pho_rate_selections = (selections.Selector('^SingleIsoTkPho|^SingleEGEle')*selections.Selector('^EtaE[BE]$|all'))()
 egid_menu_diele_rate_selections = (selections.Selector('^DoubleTkEle'))()
 egid_menu_dipho_rate_selections = (selections.Selector('^DoubleIsoTkPho'))()
-
+egid_menu_ditkem_rate_selections = (selections.Selector('^DoubleStaEG'))()
+egid_menu_sta_rate_selections = (selections.Selector('^SingleEGEle')*selections.Selector('^EtaE[BE]$|all'))()
 
 egid_eta_ee_selections = (selections.Selector('^IDTightS|all')*selections.Selector('^Eta[A][BCD]*[CD]$'))()
 egid_eta_eetk_selections = (selections.Selector('^IDTight[EP]|all')*selections.Selector('^Eta[A][BCD]*[C]$'))()
@@ -262,8 +263,14 @@ eg_menuCTl2_rate = [
         coll.TkEleL2, egid_menu_ele_rate_selections),
     # RateCounter(
     #     coll.TkEleL2Ell, egid_menu_ele_rate_selections),
+    
+    RateCounter(
+        coll.TkEmL2, egid_menu_sta_rate_selections),
+
     DoubleObjRateCounter(
         coll.DoubleTkEleL2, egid_menu_diele_rate_selections),
+    #DoubleObjRateCounter(
+    #    coll.DoubleTkEmL2, egid_menu_dipho_rate_selections)
     DoubleObjRateCounter(
-        coll.DoubleTkEmL2, egid_menu_dipho_rate_selections)
+        coll.DoubleTkEmL2, egid_menu_ditkem_rate_selections)
 ]

@@ -1,8 +1,10 @@
 
 common:
   output_dir:
-    default: /eos/user/c/cerminar/hgcal/CMSSW1015/plots/
-    triolet: /Users/cerminar/cernbox/hgcal/CMSSW1015/plots/
+    #default: /eos/user/k/kypark/www/L1T_Phase2_HGCAL_ClusterID_DPS/LegacyIDs/
+    default: /eos/user/k/kypark/www/L1T_Phase2_HGCAL_ClusterID_DPS/SoftmaxWP/
+    triolet: /eos/user/k/kypark/www/L1T_Phase2_HGCAL_ClusterID_DPS/SoftmaxWP/
+      #triolet: /eos/user/k/kypark/www/L1T_Phase2_HGCAL_ClusterID_DPS/LegacyIDs/
   plot_version: v200A
   run_clustering: False
   run_density_computation: False
